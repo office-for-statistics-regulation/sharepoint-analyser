@@ -1,2 +1,5 @@
 __pychache__
 .vscode/settings.json
+*.csv
+config_*.py
+.idea/*
