@@ -42,4 +42,10 @@ Running `main.py` calls two functions:
 - `keyword_search`: searches for the terms and outputs two files `keywords.csv` and `errors.csv`
 
 
+## Contributing
 
+See [CONTRIBUTING.md](/CONTRIBUTING.md) for more details.
+
+## Bugs
+
+Please add an Issue Ticket to this repository.
