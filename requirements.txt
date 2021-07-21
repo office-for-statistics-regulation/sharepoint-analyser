@@ -1,0 +1,4 @@
+docx
+extract_msg
+pandas
+tqdm
