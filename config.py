@@ -1,3 +1,6 @@
-word_to_search = 'transparency'
-username = 'hodgem'
-folder_to_search = 'Office for Statistics Regulation - Automation & Technology\\test_delete_after'
+import os
+
+
+words_to_search = ['transparent', 'transparency', 'transparently', 'publish', 'block', 'barrier']
+path = os.path.join(os.getcwd(), 'data')
+file_types = ['.docx','.msg']
