@@ -22,6 +22,8 @@ Our first requirement is to search through documents, largely now Microsoft Word
 
 `pip install docx`
 
+docx allows for searching within titles, main text and captions but sadly not text that has a hyperlink in. We have also included the ability to search for terms in headers and footers, and tables, see the section below on How to run for more details.
+
 #### Emails
 
 Next, we wanted to be able to search for keywords within saved `.msg` files. To do this, we use the python package `extract-msg`:
@@ -35,6 +37,8 @@ We also require other packages such as `pandas` and `tqdm`. See `requirements.tx
 ### How to run
 
 Update configuration files in `config.py` to search for the terms (`words_to_search`) in all documents (`file_types`) in a specified folder (`path`) including sub-folders.
+
+Toggle searching of text, headers and footers, and tables in .docx files too by entering `True` or `False`.
 
 Running `main.py` calls two functions:
 

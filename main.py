@@ -98,18 +98,44 @@ def keyword_search(file_count):
                         word_searched.append(word_to_search)
 
                         check_dates_match(document_name, date_created, date_modified)
-                        count_of_word_in_document_tmp = 0
+                        count_of_word_in_text_tmp = 0
+                        count_of_word_in_tables_tmp = 0
+                        count_of_word_in_headers_and_footers_tmp = 0
                         document_name_contains_word.append(document_title_contains_kw(word_to_search, file))
 
-                        # docx files are in paragraphs so we have to parse each paragraph. Note this doesn't search
-                        # headings etc
-                        for paragraph in document.paragraphs:
-                            words = paragraph.text.split()
-                            for word in words:
-                                if word_to_search == word.lower():
-                                    count_of_word_in_document_tmp += 1
+                        # docx files are in paragraphs so we have to parse each paragraph.
+                        if config.search_text == True:
+                            for paragraph in document.paragraphs:
+                                words = paragraph.text.split()
+                                for word in words:
+                                    if word_to_search == word.lower():
+                                        count_of_word_in_text_tmp += 1
 
-                        count_of_word_in_document.append(count_of_word_in_document_tmp)
+                        # tables have to be parsed differently.
+                        if config.search_tables == True:
+                            for table in document.tables:
+                                for cell in table._cells:
+                                    words = cell.text.split()
+                                    for word in words:
+                                        if word_to_search == word.lower():
+                                            count_of_word_in_tables_tmp += 1
+
+                        # To do headers and footers
+                        if config.search_headers_and_footers == True:
+                            for paragraph in document.sections[0].header.paragraphs:
+                                words = paragraph.text.split()
+                                for word in words:
+                                    if word_to_search == word.lower():
+                                        count_of_word_in_headers_and_footers_tmp += 1
+                            for paragraph in document.sections[0].footer.paragraphs:
+                                words = paragraph.text.split()
+                                for word in words:
+                                    if word_to_search == word.lower():
+                                        count_of_word_in_headers_and_footers_tmp += 1
+
+                        count_of_word_in_document.append(count_of_word_in_text_tmp +
+                                                         count_of_word_in_tables_tmp +
+                                                         count_of_word_in_headers_and_footers_tmp)
 
                 elif file_type == '.msg':
                     msg = extract_msg.Message(file)
